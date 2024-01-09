@@ -17,6 +17,8 @@ namespace LearningBuildModel
         {
             BuildModel();
             PredictModel();
+
+            Console.ReadLine();
         }
 
         private static void BuildModel()
@@ -72,10 +74,10 @@ namespace LearningBuildModel
         {
             IrisInput sampleData = new IrisInput
             {
-                Col0 = 5.1f,
-                Col1 = 3.5f,
-                Col2 = 1.4f,
-                Col3 = 0.2f
+                Col0 = 6.8f,
+                Col1 = 3.0f,
+                Col2 = 5.5f,
+                Col3 = 2.1f
             };
 
             MLContext mlContext = new MLContext();
@@ -84,8 +86,6 @@ namespace LearningBuildModel
             var predictionEngine = mlContext.Model.CreatePredictionEngine<IrisInput, IrisOutput>(mlModel);
             IrisOutput predict = predictionEngine.Predict(sampleData);
             ShowAllProperties(predict);
-
-            Console.ReadLine();
         }
 
         public class IrisInput

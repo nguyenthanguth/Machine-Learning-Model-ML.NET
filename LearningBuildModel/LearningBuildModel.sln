@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningBuildModel", "LearningBuildModel.csproj", "{A5A7F1A5-FEED-412B-A93D-62EB13B4D30A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.Multi-class_Classification", "..\01.Multi-class_Classification\01.Multi-class_Classification.csproj", "{557C1B7F-1456-4517-9347-DEAF1D2753E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Multi-class_Classification", "..\01.Multi-class_Classification\01.Multi-class_Classification.csproj", "{557C1B7F-1456-4517-9347-DEAF1D2753E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.ComputerVision-Image", "..\02.PredictName\02.ComputerVision-Image.csproj", "{78233B12-459F-4FFB-9721-BD475F437D91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{557C1B7F-1456-4517-9347-DEAF1D2753E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{557C1B7F-1456-4517-9347-DEAF1D2753E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{557C1B7F-1456-4517-9347-DEAF1D2753E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78233B12-459F-4FFB-9721-BD475F437D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78233B12-459F-4FFB-9721-BD475F437D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78233B12-459F-4FFB-9721-BD475F437D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78233B12-459F-4FFB-9721-BD475F437D91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
