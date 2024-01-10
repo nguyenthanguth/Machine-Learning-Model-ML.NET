@@ -1,9 +1,5 @@
 ﻿{
-  "Scenario": "ImageClassification",
-  "DataSource": {
-    "Type": "Folder",
-    "Version": 1
-  },
+  "Scenario": "Forecasting",
   "Environment": {
     "Type": "LocalCPU",
     "Version": 1
@@ -11,14 +7,13 @@
   "Type": "TrainingConfig",
   "Version": 4,
   "TrainingOption": {
-    "Version": 2,
+    "Version": 3,
+    "OptimizeMetric": "RMSE",
     "Subsampling": false,
-    "Type": "ClassificationTrainingOption",
+    "Type": "ForecastingTrainingOption",
     "TrainingTime": 0,
-    "ValidationOption": {
-      "Version": 0,
-      "Type": "TrainValidateSplitValidationOption",
-      "SplitRatio": 0.2
-    }
+    "UseCrossValidation": false,
+    "Horizon": 10,
+    "UseDefaultIndex": false
   }
 }
