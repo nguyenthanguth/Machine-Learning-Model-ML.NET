@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ThaiDanh.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="save_cbNguoiNhanTen" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Nguyễn Văn A</Value>
+    </Setting>
+    <Setting Name="save_cbNguoiNhanDiaChi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bình Định</Value>
+    </Setting>
+    <Setting Name="save_cbKhoLyDo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Lý do xuất kho</Value>
+    </Setting>
+    <Setting Name="save_cbKhoXuatTai" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Xuất tại kho</Value>
+    </Setting>
+    <Setting Name="save_cbKhoDiaDiem" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Địa điểm kho</Value>
+    </Setting>
+    <Setting Name="save_cbHHTen" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Tên hàng hoá</Value>
+    </Setting>
+    <Setting Name="save_cbHHMaSo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbHHDonVi" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbSoLuongYeuCau" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbSoLuongThucXuat" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbHHDonGia" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbHHGhiChu" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="save_cbAutoFillDataNN" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="save_cbAutoFillDataHH" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="save_tbSoPhieu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">999</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

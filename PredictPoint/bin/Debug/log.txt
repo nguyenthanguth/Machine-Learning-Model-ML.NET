@@ -1,0 +1,6 @@
+Version: BimCommandsVN_v22
+MachineName: THANG-PC
+UserName: Admin
+UserDomainName: THANG-PC
+Time: 11/01/2024 2:44:57 CH
+
