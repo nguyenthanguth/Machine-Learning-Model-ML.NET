@@ -3,11 +3,15 @@ using SpreadsheetGear.Drawing.Printing;
 using SpreadsheetGear.Printing;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThaiDanh.Properties;
+using Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace ThaiDanh
 {
@@ -110,9 +114,9 @@ namespace ThaiDanh
             worksheet.Cells["A11"].Value = $"- Lý do xuất kho: ...";
             worksheet.Cells["A12"].Value = $"- Xuất tại kho (ngăn lô): ....     Địa điểm: ...";
 
-            worksheet.Cells["B17:J21"].ClearContents();
+            worksheet.Cells["B17:J22"].ClearContents();
 
-            worksheet.Cells["A24"].Value = $"- Tổng số tiền (viết bằng chữ): ... đồng";
+            worksheet.Cells["A25"].Value = $"- Tổng số tiền (viết bằng chữ): ... đồng";
             workbook.Save();
             workbook.WorkbookSet.ReleaseLock();
         }
@@ -292,15 +296,41 @@ namespace ThaiDanh
             {
                 int index = cbHHTen.SelectedIndex;
 
-                cbHHMaSo.SelectedIndex = index;
-                cbHHDonVi.SelectedIndex = index;
-                cbHHDonGia.SelectedIndex = index;
-                cbHHGhiChu.SelectedIndex = index;
+                try
+                {
+                    cbHHMaSo.SelectedIndex = index;
+                    cbHHDonVi.SelectedIndex = index;
+                    cbHHDonGia.SelectedIndex = index;
+                    cbHHGhiChu.SelectedIndex = index;
+                }
+                catch { }
             }
         }
 
         private void LoopUpdateData()
         {
+            // Get số phiếu
+            if (tbSoPhieu.ReadOnly)
+            {
+                string[] files = Directory.GetFiles("./data");
+                int soPhieuMax = 0;
+                foreach (string file in files)
+                {
+                    try
+                    {
+                        FileInfo fileInfo = new FileInfo(file);
+                        string name = fileInfo.Name;
+                        int soPhieu = Convert.ToInt32(name.Split('-')[0]);
+                        if (soPhieu > soPhieuMax)
+                        {
+                            soPhieuMax = soPhieu;
+                        }
+                    }
+                    catch { }
+                }
+                tbSoPhieu.Text = Convert.ToString(soPhieuMax + 1);
+            }
+
             try
             {
                 workbookView.GetLock();
@@ -331,14 +361,14 @@ namespace ThaiDanh
                 IWorksheet worksheet = workbook.Worksheets["Sample"];
 
                 int rowStart = 17;
-                int rowEnd = 21;
+                int rowEnd = 22;
                 for (int i = rowStart; i <= rowEnd; i++)
                 {
                     string value = Convert.ToString(worksheet.Cells[$"B{i}"].Value);
                     if (string.IsNullOrWhiteSpace(value))
                     {
-                        worksheet.Cells[$"B{i}"].Value = cbHHTen.Text;
-                        worksheet.Cells[$"D{i}"].Value = cbHHMaSo.Text;
+                        worksheet.Cells[$"B{i}"].Value = $"{cbHHTen.Text}\n({cbHHMaSo.Text})";
+                        //worksheet.Cells[$"D{i}"].Value = cbHHMaSo.Text;
                         worksheet.Cells[$"E{i}"].Value = cbHHDonVi.Text;
                         worksheet.Cells[$"F{i}"].Value = cbSoLuongYeuCau.Text;
                         worksheet.Cells[$"G{i}"].Value = cbSoLuongThucXuat.Text;
@@ -358,7 +388,6 @@ namespace ThaiDanh
 
         private void btXuatPhieuPDF_Click(object sender, EventArgs e)
         {
-
             try
             {
                 workbookView.GetLock();
@@ -366,14 +395,39 @@ namespace ThaiDanh
                 IWorkbook workbook = workbookView.ActiveWorkbook;
                 IWorksheet worksheet = workbook.Worksheets["Sample"];
 
-                fPrintComputer fPrintComputer = new fPrintComputer();
-                fPrintComputer.ShowDialog();
-                foreach (string print in fPrintComputer.listPrint)
+                #region lưu pdf
+                DialogResult savePdf = MessageBox.Show("Lưu phiếu xuất kho file PDF vào folder data", "Thông báo", MessageBoxButtons.YesNo);
+                if (savePdf == DialogResult.Yes)
                 {
-                    WorkbookPrintDocument printDocument = new WorkbookPrintDocument(worksheet, PrintWhat.Sheet);
-                    printDocument.PrinterSettings.PrinterName = print;
-                    printDocument.Print();
+                    DialogResult openPdf = MessageBox.Show("Mở file PDF", "Thông báo", MessageBoxButtons.YesNo);
+
+                    IWorkbook wb = Factory.GetWorkbook();
+                    IWorksheet ws = wb.Worksheets[0];
+                    ws = worksheet;
+
+                    string fileTemp = Path.Combine(Directory.GetCurrentDirectory(), "saveToPdf.xls");
+                    ws.SaveAs(fileTemp, FileFormat.Excel8);
+
+                    string filePdf = Path.Combine(Directory.GetCurrentDirectory(), $"data/{tbSoPhieu.Text}-{cbNguoiNhanTen.Text}.pdf");
+                    SaveToPDF(fileTemp, filePdf);
+
+                    // xóa
+                    if (File.Exists(fileTemp))
+                    {
+                        File.Delete(fileTemp);
+                    }
+
+                    if (DialogResult.Yes == openPdf)
+                    {
+                        Process.Start(filePdf);
+                    }
                 }
+                #endregion
+
+                fPrintComputer fPrintComputer = new fPrintComputer(workbook);
+                this.Hide();
+                fPrintComputer.ShowDialog();
+                this.Show();
             }
             finally
             {
@@ -390,12 +444,68 @@ namespace ThaiDanh
                 IWorkbook workbook = workbookView.ActiveWorkbook;
                 IWorksheet worksheet = workbook.Worksheets["Sample"];
 
-                worksheet.Cells["A24"].Value = $"- Tổng số tiền (viết bằng chữ): {ConvertNumberToWord.GetWords(worksheet.Cells["J22"].Value)} đồng";
+                worksheet.Cells["A25"].Value = $"- Tổng số tiền (viết bằng chữ): {ConvertNumberToWord.GetWords(worksheet.Cells["J23"].Value)} đồng";
             }
             finally
             {
                 workbookView.ReleaseLock();
             }
+        }
+
+        private void cbHHMaSo_TextChanged(object sender, EventArgs e)
+        {
+            double data = 0.0;
+            foreach (string number in cbHHMaSo.Text.Split(','))
+            {
+                try
+                {
+                    double kg = Convert.ToDouble(number) / 10;
+                    data += kg;
+                }
+                catch { }
+            }
+            cbSoLuongThucXuat.Text = data.ToString();
+        }
+
+        private void SaveToPDF(string fileXls, string saveFilePdf)
+        {
+            // Khởi tạo một ứng dụng Excel
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+
+            try
+            {
+                // Mở một Workbook hoặc tạo mới nếu không tồn tại
+                Workbook wb = excelApp.Workbooks.Open(fileXls);
+
+                Sheets sheets = wb.Sheets;
+                Worksheet ws = sheets[1];
+                ws.ExportAsFixedFormat2(XlFixedFormatType.xlTypePDF, saveFilePdf);
+
+                // Đóng Workbook mà không lưu thay đổi
+                wb.Close(false);
+            }
+            finally
+            {
+                // Đóng ứng dụng Excel
+                excelApp.Quit();
+            }
+        }
+
+        private void tbSoPhieu_DoubleClick(object sender, EventArgs e)
+        {
+            if (tbSoPhieu.ReadOnly == true)
+            {
+                tbSoPhieu.ReadOnly = false;
+            }
+            else
+            {
+                tbSoPhieu.ReadOnly = true;
+            }
+        }
+
+        private void btXoaHangHoa_Click(object sender, EventArgs e)
+        {
+            SaveSheetSampleDefault();
         }
     }
 }
