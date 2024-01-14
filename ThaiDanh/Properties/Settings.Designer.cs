@@ -202,5 +202,17 @@ namespace ThaiDanh.Properties {
                 this["save_tbSoPhieu"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal save_nSoLanIn {
+            get {
+                return ((decimal)(this["save_nSoLanIn"]));
+            }
+            set {
+                this["save_nSoLanIn"] = value;
+            }
+        }
     }
 }

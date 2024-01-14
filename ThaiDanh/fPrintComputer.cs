@@ -9,6 +9,7 @@ using SpreadsheetGear;
 using SpreadsheetGear.Drawing.Printing;
 using SpreadsheetGear.Printing;
 using SpreadsheetGear.Windows.Forms;
+using ThaiDanh.Properties;
 
 namespace ThaiDanh
 {
@@ -53,9 +54,12 @@ namespace ThaiDanh
                 CheckedListBox.CheckedItemCollection check = cbList.CheckedItems;
                 foreach (string computerPrint in check)
                 {
-                    WorkbookPrintDocument printDocument = new WorkbookPrintDocument(worksheet, PrintWhat.Sheet);
-                    printDocument.PrinterSettings.PrinterName = computerPrint; // chọn tên máy in
-                    printDocument.Print();
+                    for (int i = 1; i <= Convert.ToInt32(nSoLanIn.Value); i++)
+                    {
+                        WorkbookPrintDocument printDocument = new WorkbookPrintDocument(worksheet, PrintWhat.Sheet);
+                        printDocument.PrinterSettings.PrinterName = computerPrint; // chọn tên máy in
+                        printDocument.Print();
+                    }
                 }
                 this.Close();
             }
@@ -64,6 +68,17 @@ namespace ThaiDanh
                 this.Workbook.WorkbookSet.ReleaseLock();
             }
 
+        }
+
+        private void fPrintComputer_Load(object sender, EventArgs e)
+        {
+            nSoLanIn.Value = Settings.Default.save_nSoLanIn;
+        }
+
+        private void fPrintComputer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.save_nSoLanIn = nSoLanIn.Value;
+            Settings.Default.Save();
         }
     }
 }

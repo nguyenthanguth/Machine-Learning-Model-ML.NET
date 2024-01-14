@@ -565,7 +565,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thái Danh - Phiếu Xuất Kho - v0.3";
+            this.Text = "Thái Danh - Phiếu Xuất Kho - v0.4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fMain_FormClosing);
             this.Load += new System.EventHandler(this.fMain_Load);
             this.panel.ResumeLayout(false);
