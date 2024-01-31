@@ -12,6 +12,9 @@ using System.Windows.Forms;
 using ThaiDanh.Properties;
 using Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
+using ConsoleApp2;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace ThaiDanh
 {
@@ -396,7 +399,7 @@ namespace ThaiDanh
                 IWorksheet worksheet = workbook.Worksheets["Sample"];
 
                 #region lưu pdf
-                DialogResult savePdf = MessageBox.Show("Lưu phiếu xuất kho file PDF vào folder data", "Thông báo", MessageBoxButtons.YesNo);
+                DialogResult savePdf = MessageBox.Show("Lưu phiếu xuất kho file PDF & Excel ?", "Thông báo", MessageBoxButtons.YesNo);
                 if (savePdf == DialogResult.Yes)
                 {
                     DialogResult openPdf = MessageBox.Show("Mở file PDF", "Thông báo", MessageBoxButtons.YesNo);
@@ -421,6 +424,10 @@ namespace ThaiDanh
                     {
                         Process.Start(filePdf);
                     }
+
+                    #region lưu excel
+                    SaveToExcel(worksheet);
+                    #endregion
                 }
                 #endregion
 
@@ -432,6 +439,120 @@ namespace ThaiDanh
             finally
             {
                 workbookView.ReleaseLock();
+            }
+        }
+
+        private void SaveToExcel(IWorksheet worksheet)
+        {
+            string pathFileE = Path.Combine(Directory.GetCurrentDirectory(), $"excel/{DateTime.Now.ToString("yyyy-MM-dd")}.xls");
+            if (File.Exists(pathFileE))
+            {
+                // open and create
+                IWorkbook wb = Factory.GetWorkbook(pathFileE);
+                IWorksheet ws = wb.Worksheets.Add();
+
+                ws.WindowInfo.Zoom = 55;
+                ws.Name = tbSoPhieu.Text;
+                worksheet.Cells.Copy(ws.Cells);
+                wb.Save();
+
+                // TK
+                TKSP(wb);
+            }
+            else
+            {
+                // save new file
+                IWorkbook wb = Factory.GetWorkbook();
+                IWorksheet ws = wb.Worksheets.Add();
+
+                ws.WindowInfo.Zoom = 55;
+                worksheet.Cells.Copy(ws.Cells);
+                ws.Name = tbSoPhieu.Text;
+                wb.SaveAs(pathFileE, FileFormat.Excel8);
+
+                // TK
+                TKSP(wb);
+            }
+        }
+
+        private void TKSP(IWorkbook wb)
+        {
+            wb.Worksheets[0].Cells["A1:F1000"].Clear();
+            wb.Worksheets[0].StandardWidth = 30;
+
+            SanPham sanPham = new SanPham();
+            sanPham.GetAllSanPham(wb);
+
+            int r = 0;
+            int c = 0;
+            List<SanPham> listSanPham = sanPham.ListSanPhamInSheet;
+            foreach (SanPham sp in listSanPham)
+            {
+                if (!string.IsNullOrWhiteSpace(sp.TenSP))
+                {
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.NguoiNhan;
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.TenSP;
+                    wb.Worksheets[0].Cells[r, c++].Value = "'" + sp.KhoiLuongGam;
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.DVT;
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.SoLuongThucXuat;
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.GhiChu;
+                    wb.Worksheets[0].Cells[r, c++].Value = sp.SoPhieu;
+
+                    r++;
+                    c = 0;
+                }
+            }
+            wb.Save();
+
+            if (Settings.Default.save_cbSheetTrangThai == "TẮT")
+            {
+                return;
+            }
+
+            #region post data to google sheet
+            List<IList<object>> listlistObj = new List<IList<object>>();
+            foreach (SanPham sp in listSanPham)
+            {
+                if (string.IsNullOrWhiteSpace(sp.TenSP))
+                {
+                    continue;
+                }
+
+                IList<object> listObj = new List<object>(); // ứng với cột
+                listObj.Add(sp.NguoiNhan);
+                listObj.Add(sp.TenSP);
+                listObj.Add(sp.KhoiLuongGam);
+                listObj.Add(sp.DVT);
+                listObj.Add(sp.SoLuongThucXuat);
+                listObj.Add(sp.GhiChu);
+                listObj.Add(sp.SoPhieu);
+
+                listlistObj.Add(listObj); // ứng với hàng
+            }
+            PostDataSheet(listlistObj);
+            #endregion
+        }
+
+        private void PostDataSheet(List<IList<object>> listlistObj)
+        {
+            try
+            {
+                string folderCre = Path.Combine(Directory.GetCurrentDirectory(), "credentials");
+                string[] fileCres = Directory.GetFiles(folderCre);
+                string pathToFile = Path.Combine(folderCre, fileCres.First());
+
+                #region Connect and Post
+                GoogleSheet googleSheet = new GoogleSheet();
+                googleSheet.ConnectJsonCredentials(pathToFile);
+                googleSheet.SpreadSheetID = Settings.Default.save_tbSpreadSheetID; // thay thế
+
+                string newSheet = DateTime.Now.ToString("yyyy-MM-dd");
+                googleSheet.PostData(newSheet, listlistObj);
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Post Data To Sheet");
             }
         }
 
@@ -506,6 +627,12 @@ namespace ThaiDanh
         private void btXoaHangHoa_Click(object sender, EventArgs e)
         {
             SaveSheetSampleDefault();
+        }
+
+        private void btPostDataSheet_Click(object sender, EventArgs e)
+        {
+            fGoogleSheet fGoogleSheet = new fGoogleSheet();
+            fGoogleSheet.ShowDialog();
         }
     }
 }

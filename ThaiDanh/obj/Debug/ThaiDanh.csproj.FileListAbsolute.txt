@@ -38,7 +38,6 @@ C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bi
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\System.ValueTuple.xml
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.csproj.AssemblyReference.cache
-C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.csproj.SuggestedBindingRedirects.cache
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.fMain.resources
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.fPrintComputer.resources
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.Properties.Resources.resources
@@ -51,3 +50,10 @@ C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\ob
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\ICSharpCode.SharpZipLib.xml
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\SixLabors.Fonts.xml
 C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\SixLabors.ImageSharp.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\Google.Apis.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\Google.Apis.Auth.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\Google.Apis.Core.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\Google.Apis.Sheets.v4.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\Newtonsoft.Json.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\bin\Debug\System.CodeDom.xml
+C:\Users\InuYasha-MEV\Documents\GitHub\Machine-Learning-Model-ML.NET\ThaiDanh\obj\Debug\ThaiDanh.fGoogleSheet.resources

@@ -12,7 +12,7 @@ namespace ThaiDanh.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -212,6 +212,43 @@ namespace ThaiDanh.Properties {
             }
             set {
                 this["save_nSoLanIn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BẬT")]
+        public string save_cbSheetTrangThai {
+            get {
+                return ((string)(this["save_cbSheetTrangThai"]));
+            }
+            set {
+                this["save_cbSheetTrangThai"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://docs.google.com/spreadsheets/d/1eW1mLm7agFCN9jWPgqpFf7ICqasEYiljmF5KQUfbT" +
+            "E4/edit#gid=0")]
+        public string save_tbSheetURL {
+            get {
+                return ((string)(this["save_tbSheetURL"]));
+            }
+            set {
+                this["save_tbSheetURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string save_tbSpreadSheetID {
+            get {
+                return ((string)(this["save_tbSpreadSheetID"]));
+            }
+            set {
+                this["save_tbSpreadSheetID"] = value;
             }
         }
     }

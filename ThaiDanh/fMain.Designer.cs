@@ -71,6 +71,7 @@
             this.btNguoiNhanSave = new System.Windows.Forms.Button();
             this.cbNguoiNhanDiaChi = new System.Windows.Forms.ComboBox();
             this.cbNguoiNhanTen = new System.Windows.Forms.ComboBox();
+            this.btPostDataSheet = new System.Windows.Forms.Button();
             this.btConvertToWord = new System.Windows.Forms.Button();
             this.btXoaHangHoa = new System.Windows.Forms.Button();
             this.btXuatPhieuPDF = new System.Windows.Forms.Button();
@@ -107,6 +108,7 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.btPostDataSheet);
             this.panel1.Controls.Add(this.btConvertToWord);
             this.panel1.Controls.Add(this.btXoaHangHoa);
             this.panel1.Controls.Add(this.btXuatPhieuPDF);
@@ -525,6 +527,16 @@
             this.cbNguoiNhanTen.TabIndex = 0;
             this.cbNguoiNhanTen.SelectedIndexChanged += new System.EventHandler(this.cbNguoiNhanTen_SelectedIndexChanged);
             // 
+            // btPostDataSheet
+            // 
+            this.btPostDataSheet.Location = new System.Drawing.Point(9, 552);
+            this.btPostDataSheet.Name = "btPostDataSheet";
+            this.btPostDataSheet.Size = new System.Drawing.Size(124, 42);
+            this.btPostDataSheet.TabIndex = 1;
+            this.btPostDataSheet.Text = "Cài đặt post dữ liệu lên google sheet";
+            this.btPostDataSheet.UseVisualStyleBackColor = true;
+            this.btPostDataSheet.Click += new System.EventHandler(this.btPostDataSheet_Click);
+            // 
             // btConvertToWord
             // 
             this.btConvertToWord.Location = new System.Drawing.Point(9, 504);
@@ -563,9 +575,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thái Danh - Phiếu Xuất Kho - v0.4";
+            this.Text = "Thái Danh - Phiếu Xuất Kho - v0.7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fMain_FormClosing);
             this.Load += new System.EventHandler(this.fMain_Load);
             this.panel.ResumeLayout(false);
@@ -627,6 +640,7 @@
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.NumericUpDown tbSoPhieu;
         private System.Windows.Forms.Button btXoaHangHoa;
+        private System.Windows.Forms.Button btPostDataSheet;
     }
 }
 

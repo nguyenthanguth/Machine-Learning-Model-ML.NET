@@ -50,5 +50,14 @@
     <Setting Name="save_nSoLanIn" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="save_cbSheetTrangThai" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BẬT</Value>
+    </Setting>
+    <Setting Name="save_tbSheetURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://docs.google.com/spreadsheets/d/1eW1mLm7agFCN9jWPgqpFf7ICqasEYiljmF5KQUfbTE4/edit#gid=0</Value>
+    </Setting>
+    <Setting Name="save_tbSpreadSheetID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
