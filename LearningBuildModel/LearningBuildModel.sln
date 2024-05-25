@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Multi-class_Classificati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.ComputerVision-Image", "..\02.PredictName\02.ComputerVision-Image.csproj", "{78233B12-459F-4FFB-9721-BD475F437D91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.AnalysPoint", "..\04.AnalysPoint\04.AnalysPoint.csproj", "{B9FF7AF7-3F8B-486F-B3A8-2D6C6047411D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.AnalysPoint", "..\04.AnalysPoint\04.AnalysPoint.csproj", "{B9FF7AF7-3F8B-486F-B3A8-2D6C6047411D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictPoint", "..\PredictPoint\PredictPoint.csproj", "{99922C66-C3E3-425D-8EE3-FD90C123D5E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictNumber", "..\PredictNumber\PredictNumber.csproj", "{556E74FB-1943-423B-A947-D4CCCFEBDDFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{99922C66-C3E3-425D-8EE3-FD90C123D5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99922C66-C3E3-425D-8EE3-FD90C123D5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99922C66-C3E3-425D-8EE3-FD90C123D5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556E74FB-1943-423B-A947-D4CCCFEBDDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556E74FB-1943-423B-A947-D4CCCFEBDDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556E74FB-1943-423B-A947-D4CCCFEBDDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556E74FB-1943-423B-A947-D4CCCFEBDDFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
