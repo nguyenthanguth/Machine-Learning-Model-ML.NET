@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using Microsoft.ML;
 
 namespace PredictNumber
@@ -12,7 +14,7 @@ namespace PredictNumber
     public partial class MLModelPredict
     {
         public const string RetrainFilePath =  @"C:\Users\Admin\Documents\GitHub\Machine-Learning-Model-ML.NET\PredictNumber\bin\Debug\number.txt";
-        public const char RetrainSeparatorChar = ' ';
+        public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  false;
 
          /// <summary>
@@ -86,7 +88,11 @@ namespace PredictNumber
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Forecasting.ForecastBySsa(windowSize:2,seriesLength:10,trainSize:9,horizon:10,outputColumnName:@"col1",inputColumnName:@"col1",confidenceLowerBoundColumn:@"col1_LB",confidenceUpperBoundColumn:@"col1_UB");
+            var pipeline = mlContext.Transforms.ReplaceMissingValues(@"col0", @"col0")      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"col0"}))      
+                                    .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"col1",inputColumnName:@"col1",addKeyValueAnnotationsAsText:false))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(new SdcaMaximumEntropyMulticlassTrainer.Options(){L1Regularization=0.6610581F,L2Regularization=0.03125F,LabelColumnName=@"col1",FeatureColumnName=@"Features"}))      
+                                    .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName:@"PredictedLabel",inputColumnName:@"PredictedLabel"));
 
             return pipeline;
         }

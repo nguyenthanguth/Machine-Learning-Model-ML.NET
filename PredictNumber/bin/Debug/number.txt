@@ -1,10 +1,9 @@
-không 0
-một 1
-hai 2
-ba 3
-bốn 4
-năm 5
-sáu 6
-bảy 7
-tám 8
-chín 9
+0,không
+0,không
+0,không
+1,một
+1,một
+1,một
+2,hai
+2,hai
+2,hai
